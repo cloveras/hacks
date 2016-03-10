@@ -20,7 +20,7 @@ my $today = strftime "%F", localtime;
 foreach $log (@logs) {
     $zlog = IO::Uncompress::Gunzip->new($log) or die "$log: $GunzipError\n";
     while (<$zlog>) {
-	$user = (split/\s+/)[2]; # Split by whitespace, use 3rd column.
+	$user = (split/\s+/)[2]; # Split by whitespace, username is 3rd item.
 	next if $user eq "-"; # Skip lines without username.
 	$users{$user} += 1; #Increment for this user.
     }
