@@ -17,6 +17,7 @@ my $user = undef;
 my %users = ();
 my $today = strftime "%F", localtime;
 
+# Loop through all logs, check every line..
 foreach $log (@logs) {
     $zlog = IO::Uncompress::Gunzip->new($log) or die "$log: $GunzipError\n";
     while (<$zlog>) {
@@ -25,10 +26,10 @@ foreach $log (@logs) {
 	$users{$user} += 1; #Increment for this user.
     }
 
-    # Tell the human what is going on, and create separate logs.
+    # Create the new per-user access log.
     print "$log\n" if $verbose;
     foreach (sort keys %users) {
-	print "\t$_: $users{$_}\n" if $verbose;	
+	print "\t$_: $users{$_}\n" if $verbose;	# Tell the human what is going on: Username and count.
 	system("grep $_ $log > access.log.$today.$_"); # Quick and dirty..
     }
 }
