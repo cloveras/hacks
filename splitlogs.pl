@@ -8,14 +8,14 @@ use strict;
 use POSIX qw(strftime);
 use IO::Uncompress::Gunzip qw($GunzipError);
 
-# All logs are in the same directory: access.log.1.gz, access.log.2.gz, etc
-my @logs = glob "./access.log.*.gz";
-my $verbose = 0;
-my $log = undef;
-my $zlog = undef;
-my $user = undef;
-my %users = ();
-my $today = strftime "%F", localtime;
+# My precious variables.
+my @logs = glob "./access.log.*.gz"; # All logs are in the same directory: access.log.1.gz, access.log.2.gz, etc
+my $verbose = 0; # Print iformation for the human?
+my $log = undef; # Current log.
+my $zlog = undef; # Current compressed log.
+my $user = undef; # Current user.
+my %users = (); # User hash.
+my $today = strftime "%F", localtime; # 2016-03-10
 
 # Loop through all logs, check every line..
 foreach $log (@logs) {
