@@ -10,7 +10,7 @@ use IO::Uncompress::Gunzip qw($GunzipError);
 
 # My precious variables.
 my @logs = glob "./access.log.*.gz"; # All logs are in the same directory: access.log.1.gz, access.log.2.gz, etc
-my $verbose = 0; # Print iformation for the human?
+my $verbose = 1; # Print iformation for the human?
 my $log = undef; # Current log.
 my $zlog = undef; # Current compressed log.
 my $user = undef; # Current user.
@@ -30,6 +30,6 @@ foreach $log (@logs) {
     print "$log\n" if $verbose;
     foreach (sort keys %users) {
 	print "\t$_: $users{$_}\n" if $verbose;	# Tell the human what is going on: Username and count.
-	system("grep $_ $log > access.log.$today.$_"); # Quick and dirty..
+	system("zgrep $_ $log > access.log.$today.$_"); # Quick and dirty..
     }
 }
