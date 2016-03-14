@@ -1,8 +1,11 @@
 #!/usr/bin/perl -w 
 
 # splitlogs.pl
+#
 # Loops through gzipped access logs, splits them into one log per username:
 # access.log.1.gz, access.log.2.gz, etc -> access.log.2016-03-10.username1, access.log.2016-03-10.username2, etc  
+#
+# cl@superelectric.net
 
 use strict;
 use POSIX qw(strftime);
